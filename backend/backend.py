@@ -1,9 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-# backend/backend.py
 import requests
 from flask import Flask
-import os
+
 
 app = Flask(__name__)
 
@@ -18,8 +17,5 @@ def hello_world():
         return ''
 
 if __name__ == '__main__':
-    if os.path.exists("/var/run/backend.sock"):
-        os.remove("/var/run/backend.sock")
-    app.run(debug=True, unix_socket="/var/run/backend.sock")
-
+    app.run(debug=True, host='::', port='3001')
 

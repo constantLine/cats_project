@@ -3,7 +3,7 @@
       "module": "CommonJS",
       "esModuleInterop": true,
       "target": "ES2018",
-      "outDir": "./",
+      "outDir": "./dist",
       "strict": true
     }
   }

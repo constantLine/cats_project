@@ -12,7 +12,7 @@ RUN npm install
 COPY tsconfig.json .
 COPY frontend.ts .
 COPY index.jade .
-COPY index.jade /dist
+COPY dist .
 
 # Собираем TypeScript в JavaScript
 RUN npm run build

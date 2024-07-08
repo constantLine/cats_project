@@ -4,10 +4,8 @@ FROM node:18-slim
 # Устанавливаем рабочую директорию
 WORKDIR /app
 
-# Копируем package.json и package-lock.json (если есть)
+# Копируем package.json и устанавливаем зависимости
 COPY package.json .
-
-# Устанавливаем зависимости
 RUN npm install
 
 # Копируем остальные файлы

@@ -16,8 +16,10 @@ services:
     build:
       context: ./frontend
     container_name: frontend
+    expose:
+      - "3000"
     ports:
-      - "80:80"  # внешний порт 80 будет проксировать запросы на порт 80 контейнера
+      - "8080:80"  # внешний порт 8080 будет проксировать запросы на порт 80 контейнера
     depends_on:
       - backend
     networks:

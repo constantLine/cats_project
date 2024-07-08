@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Запускаем frontend
-node dist/frontend.js &
+node frontend.js &
 
 # Запускаем nginx
 nginx -g 'daemon off;'

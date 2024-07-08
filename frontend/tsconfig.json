@@ -1,14 +1,11 @@
 {
     "compilerOptions": {
-        "target": "es6",
-        "module": "commonjs",
-        "outDir": "./dist",
-        "rootDir": "./",
-        "strict": true,
-        "esModuleInterop": true
-    },
-    "include": [
-        "frontend.ts"
-    ]
-}
+      "module": "CommonJS",
+      "esModuleInterop": true,
+      "target": "ES2018",
+      "outDir": "./dist",
+      "strict": true
+    }
+  }
+  
 

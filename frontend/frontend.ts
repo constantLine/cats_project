@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import path from "path";
+const fetch = require("node-fetch"); // Импорт node-fetch как CommonJS модуль
 
 const app = express();
 app.set('views', path.join(__dirname, '/'));
@@ -10,7 +11,6 @@ const backendUrl = "http://backend/api/cat_get";  // Обращение к бэ�
 
 app.get('/', async (req: Request, res: Response) => {
     try {
-        const fetch = (await import("node-fetch")).default;
         const cat_data = await fetch(backendUrl);
         const data = await cat_data.text();
         res.render('index.jade', { title: "KIT Frontend", cat_url: data });
@@ -23,3 +23,4 @@ app.get('/', async (req: Request, res: Response) => {
 app.listen(port, () => {
     console.log(`Frontend app listening on port ${port}`);
 });
+

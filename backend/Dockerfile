@@ -8,15 +8,18 @@ WORKDIR /app
 COPY requirements.txt .
 COPY backend.py .
 
-# Устанавливаем зависимости
-RUN pip install --no-cache-dir -r requirements.txt
-RUN pip install uwsgi
-
 # Устанавливаем необходимые инструменты и библиотеки
 RUN apt-get update && \
     apt-get install -y gcc libc-dev python3-dev build-essential && \
     apt-get install -y nginx tini && \
+    apt-get install -y linux-headers-$(uname -r) && \
     apt-get clean
+
+# Устанавливаем зависимости из requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Устанавливаем uWSGI
+RUN pip install uwsgi
 
 # Копируем конфигурацию nginx в контейнер
 COPY nginx.conf /etc/nginx/nginx.conf
@@ -29,10 +32,11 @@ COPY start.sh /start.sh
 RUN chmod +x /start.sh
 
 # Открываем порты
-EXPOSE 80 
+EXPOSE 80
 
 # Используем tini в качестве init системы
 ENTRYPOINT ["/usr/bin/tini", "--"]
 
 # Запускаем скрипт, который будет стартовать оба сервиса
-CMD ["/start.sh","--socket", "/tmp/backend.sock"]
+CMD ["/start.sh"]
+

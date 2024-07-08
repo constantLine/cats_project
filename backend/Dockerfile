@@ -13,7 +13,6 @@ RUN apt-get update && \
     apt-get install -y gcc libc-dev python3-dev build-essential nginx tini && \
     apt-get clean
 
-
 # Устанавливаем зависимости из requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 

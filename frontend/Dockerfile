@@ -6,12 +6,14 @@ WORKDIR /app
 
 # Копируем package.json и package-lock.json (если есть)
 COPY package.json .
-COPY tsconfig.json .
-COPY frontend.ts .
-COPY index.jade .
 
 # Устанавливаем зависимости
 RUN npm install
+
+# Копируем остальные файлы
+COPY tsconfig.json .
+COPY frontend.ts .
+COPY index.jade .
 
 # Собираем TypeScript в JavaScript
 RUN npm run build

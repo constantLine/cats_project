@@ -6,11 +6,11 @@ app.set('views', path.join(__dirname, '/'));
 app.set('view engine', 'jade');
 
 const port: number = 3000;
-const backendUrl = "http://backend:3001/cat_get";  // Обращение к бэкенду через Nginx на порту 80
+const backendSocket = "/tmp/backend.sock";  // Путь к UNIX-сокету бэкенда
 
 app.get('/', async (req: Request, res: Response) => {
     try {
-        const cat_data = await fetch(backendUrl);
+        const cat_data = await fetch(`http://unix:/${backendSocket}/cat_get`, { method: 'GET', socketPath: backendSocket });
         const data = await cat_data.text();
         res.render('../index.jade', { title: "KIT Frontend", cat_url: data });
     } catch (error) {
@@ -19,7 +19,7 @@ app.get('/', async (req: Request, res: Response) => {
     }
 });
 
-app.listen(port, () => {
-    console.log(`Frontend app listening on port ${port}`);
+app.listen('/tmp/frontend.sock', () => {
+    console.log(`Frontend app listening on socket`);
 });
 

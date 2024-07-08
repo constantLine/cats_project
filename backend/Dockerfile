@@ -14,8 +14,9 @@ RUN pip install uwsgi
 
 # Устанавливаем необходимые инструменты и библиотеки
 RUN apt-get update && \
-    apt-get install -y gcc libc-dev && \
-    apt-get install -y nginx tini
+    apt-get install -y gcc libc-dev python3-dev build-essential && \
+    apt-get install -y nginx tini && \
+    apt-get clean
 
 # Копируем конфигурацию nginx в контейнер
 COPY nginx.conf /etc/nginx/nginx.conf

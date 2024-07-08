@@ -7,8 +7,8 @@ services:
     container_name: backend
     expose:
       - "3001"
-    volumes:
-      - ./backend/backend.sock:/backend.sock  # Монтируем UNIX-сокет бэкенда в контейнер
+    ports:
+      - "3001:80"  # внешний порт 3001 будет проксировать запросы на порт 80 контейнера
     networks:
       - my_network
 
@@ -18,8 +18,8 @@ services:
     container_name: frontend
     expose:
       - "3000"
-    volumes:
-      - ./frontend/frontend.sock:/frontend.sock  # Монтируем UNIX-сокет фронтенда в контейнер
+    ports:
+      - "8080:80"  # внешний порт 8080 будет проксировать запросы на порт 80 контейнера
     depends_on:
       - backend
     networks:

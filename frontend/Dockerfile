@@ -33,4 +33,4 @@ EXPOSE 80 3000
 ENTRYPOINT ["/usr/bin/tini", "--"]
 
 # Запускаем скрипт, который будет стартовать оба сервиса
-CMD ["/start.sh", "--socket", "/frontend.sock"]
+CMD ["/start.sh"]

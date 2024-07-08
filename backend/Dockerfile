@@ -8,12 +8,11 @@ WORKDIR /app
 COPY requirements.txt .
 COPY backend.py .
 
-# Устанавливаем необходимые инструменты и библиотеки
+# Устанавливаем зависимости
 RUN apt-get update && \
-    apt-get install -y gcc libc-dev python3-dev build-essential && \
-    apt-get install -y nginx tini && \
-    apt-get install -y linux-headers-$(uname -r) && \
+    apt-get install -y gcc libc-dev python3-dev build-essential nginx tini && \
     apt-get clean
+
 
 # Устанавливаем зависимости из requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt

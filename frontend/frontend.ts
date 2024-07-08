@@ -13,7 +13,7 @@ app.get('/', async (req: Request, res: Response) => {
         //const fetch = (await import("node-fetch")).default; 
         const cat_data = await fetch(backendUrl);
         const data = await cat_data.text();
-        res.render('index.jade', { title: "KIT Frontend", cat_url: data });
+        res.render('../index.jade', { title: "KIT Frontend", cat_url: data });
     } catch (error) {
         console.error('Error fetching data from backend:', error);
         res.status(500).send('Error fetching data from backend');

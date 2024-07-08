@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: backend
+    expose:
+      - "3001"
+    ports:
+      - "3001:80"  # внешний порт 3001 будет проксировать запросы на порт 80 контейнера
+    networks:
+      - my_network
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: frontend
+    ports:
+      - "80:80"  # внешний порт 80 будет проксировать запросы на порт 80 контейнера
+    depends_on:
+      - backend
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge

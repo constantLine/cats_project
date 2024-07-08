@@ -12,8 +12,10 @@ COPY backend.py .
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install uwsgi
 
-# Устанавливаем nginx и tini
-RUN apt-get update && apt-get install -y nginx tini
+# Устанавливаем необходимые инструменты и библиотеки
+RUN apt-get update && \
+    apt-get install -y gcc libc-dev && \
+    apt-get install -y nginx tini
 
 # Копируем конфигурацию nginx в контейнер
 COPY nginx.conf /etc/nginx/nginx.conf

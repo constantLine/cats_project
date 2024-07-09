@@ -8,7 +8,7 @@ WORKDIR /app
 COPY requirements.txt .
 COPY backend.py .
 
-# Устанавливаем зависимости
+# Устанавливаем зависимости для uWSGI
 RUN apt-get update && \
     apt-get install -y gcc libc-dev python3-dev build-essential nginx tini && \
     apt-get clean

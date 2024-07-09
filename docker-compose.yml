@@ -3,28 +3,29 @@ version: '3.8'
 services:
   backend:
     build:
-      context: ./backend
-    container_name: backend
+      context: ./backend  # Путь к Dockerfile и исходному коду для сборки образа
+    container_name: backend  
     expose:
-      - "3001"
+      - "3001"  # Открытие порта внутри контейнера для других контейнеров в сети
     ports:
-      - "3001:80"  # внешний порт 3001 будет проксировать запросы на порт 80 контейнера
+      - "3001:80"  # Проксирование внешнего порта 3001 на порт 80 контейнера
     networks:
-      - my_network
+      - my_network  
 
   frontend:
     build:
-      context: ./frontend
-    container_name: frontend
+      context: ./frontend  
+    container_name: frontend  
     expose:
-      - "3000"
+      - "3000"  # Открытие порта внутри контейнера для других контейнеров в сети
     ports:
-      - "8080:80"  # внешний порт 8080 будет проксировать запросы на порт 80 контейнера
+      - "8080:80"  # Проксирование внешнего порта 8080 на порт 80 контейнера
     depends_on:
-      - backend
+      - backend  # Указывает, что контейнер frontend зависит от контейнера backend, который должен запуститься первым
     networks:
-      - my_network
+      - my_network  
 
+# Определение пользовательской сети для взаимодействия контейнеров
 networks:
   my_network:
-    driver: bridge
+    driver: bridge  

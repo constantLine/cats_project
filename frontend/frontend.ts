@@ -2,12 +2,9 @@ import express, { Request, Response } from "express";
 import path from "path";
 import fs from "fs";
 
-
 const app = express();
-app.listen('/tmp/frontend.sock')
 app.set('views', path.join(__dirname, '/'));
 app.set('view engine', 'jade');
-
 
 // Установка пути до сокета
 const socketPath = '/tmp/frontend.sock';
@@ -17,7 +14,7 @@ if (fs.existsSync(socketPath)) {
     fs.unlinkSync(socketPath); // Удаляем существующий сокет, если он уже существует
 }
 
-const port: number = 3000;
+// backend – имя контейнера. Запрос пойдёт на контейнер, а потом через nginx.
 const backendUrl = "http://backend/cat_get";  // Обращение к бэкенду через Nginx на порту 80
 
 app.get('/', async (req: Request, res: Response) => {
